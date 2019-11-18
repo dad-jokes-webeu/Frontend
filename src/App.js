@@ -5,19 +5,26 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import { Route } from "react-router-dom";
 import List from "./components/JokesList";
+import { Container, Row, Col } from "reactstrap";
 
 function App() {
 	return (
-		<div className="App">
-			<Navbar />
-			<Route
-				exact
-				path="/"
-				render={props => {
-					return <List api="jokes/public" />;
-				}}
-			/>
-		</div>
+		<Container>
+			<Row>
+				<Col>
+					<Navbar />
+				</Col>
+			</Row>
+			<Row>
+				<Route
+					exact
+					path="/"
+					render={props => {
+						return <List api="jokes/public" />;
+					}}
+				/>
+			</Row>
+		</Container>
 	);
 }
 
