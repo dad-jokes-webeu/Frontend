@@ -19,6 +19,7 @@ function App() {
 
 	return (
 		<div className="App">
+			<Navbar />
 			<header
 				className="App-header"
 				onClick={e => getRequest("jokes/public")}
