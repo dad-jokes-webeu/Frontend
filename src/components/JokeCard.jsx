@@ -17,9 +17,8 @@ export default function JokeCard(props) {
 	// let punchlineClass = "";
 	function togglePLine() {
 		setShowPLine(!showPLine);
-		console.log(showPLine);
 	}
-	console.log(props.joke);
+
 	return (
 		<div>
 			<Card body>
@@ -28,7 +27,9 @@ export default function JokeCard(props) {
 				<h2 className={showPLine ? "" : "punchline-hide"}>
 					{props.joke.punchline}
 				</h2>
-				<Button onClick={() => togglePLine()}>Punchline...</Button>
+				<Button color="primary" onClick={() => togglePLine()}>
+					{showPLine ? "Hide" : "Punchline..."}
+				</Button>
 			</Card>
 		</div>
 	);
