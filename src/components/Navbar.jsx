@@ -39,7 +39,7 @@ export default function Navbar() {
 		<NavContainer>
 			<img src={logo} alt="logo" />
 			<Nav>
-				<Link>
+				<Link to='#'>
 					<Button outline color="primary">
 						Knock-knock
 					</Button>{" "}
@@ -49,10 +49,10 @@ export default function Navbar() {
 						Who's there?
 					</DropdownToggle>
 					<DropdownMenu>
-						<Link>
+						<Link to='#'>
 							<DropdownItem>Sign In</DropdownItem>
 						</Link>
-						<Link>
+						<Link to='#'>
 							<DropdownItem>Register</DropdownItem>
 						</Link>
 					</DropdownMenu>
