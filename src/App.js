@@ -5,6 +5,7 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import { Route } from "react-router-dom";
 import List from "./components/JokesList";
+import FormikForm from "./components/Form";
 
 function App() {
 	return (
@@ -17,6 +18,7 @@ function App() {
 					return <List api="jokes/public" />;
 				}}
 			/>
+			<FormikForm />
 		</div>
 	);
 }
