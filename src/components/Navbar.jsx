@@ -46,31 +46,8 @@ export default function SiteNavbar() {
 	const toggle = () => setOpen(!dropdownOpen);
 	return (
 		<>
-			{!localStorage.getItem("token") ? (
-				<>
-					<Nav>
-						<Link to="#">
-							<Button outline color="primary">
-								Knock-knock
-							</Button>{" "}
-						</Link>
-						<ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
-							<DropdownToggle caret color="primary">
-								Who's there?
-							</DropdownToggle>
-							<DropdownMenu>
-								<Link to="/login">
-									<DropdownItem>Sign In</DropdownItem>
-								</Link>
-								<Link to="/register">
-									<DropdownItem>Register</DropdownItem>
-								</Link>
-							</DropdownMenu>
-						</ButtonDropdown>
-					</Nav>
-				</>
-			) : (
-				<Navbar light expand="md">
+			{localStorage.getItem("token") ? (
+				<Navbar color="light" light expand="md">
 					{/* <NavbarBrand href="/">reactstrap</NavbarBrand> */}
 					<NavbarToggler onClick={toggle} />
 					<Collapse isOpen={dropdownOpen} navbar>
@@ -79,7 +56,29 @@ export default function SiteNavbar() {
 						</Link>
 						<Nav className="ml-auto" navbar>
 							<NavItem>
-								<NavLink href="#">Knock-knock</NavLink>
+								<NavLink tag={Link} to="/profile">
+									Profile
+								</NavLink>
+							</NavItem>
+							<NavItem>
+								<NavLink tag={Link} to="/dashboard">
+									Dashboard
+								</NavLink>
+							</NavItem>
+						</Nav>
+					</Collapse>
+				</Navbar>
+			) : (
+				<Navbar color="light" light expand="md">
+					{/* <NavbarBrand href="/">reactstrap</NavbarBrand> */}
+					<NavbarToggler onClick={toggle} />
+					<Collapse isOpen={dropdownOpen} navbar>
+						<Link to="/">
+							<img src={logo} alt="logo" className="logo" />
+						</Link>
+						<Nav className="ml-auto" navbar>
+							<NavItem>
+								<NavLink to="#">Knock-knock</NavLink>
 							</NavItem>
 							<UncontrolledDropdown nav inNavbar>
 								<DropdownToggle caret color="primary">
@@ -87,10 +86,12 @@ export default function SiteNavbar() {
 								</DropdownToggle>
 								<DropdownMenu right>
 									<DropdownItem>
-										<NavLink href="/login">Sign In</NavLink>
+										<NavLink tag={Link} to="/login">
+											Sign In
+										</NavLink>
 									</DropdownItem>
 									<DropdownItem>
-										<NavLink href="/register">
+										<NavLink tag={Link} to="/register">
 											Register
 										</NavLink>
 									</DropdownItem>
