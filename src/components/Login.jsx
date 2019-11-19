@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { withFormik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
-import axios from "axios";
-import * as help from "../helpers";
+import axiosWithAuth from "../helpers/axios";
 
 function UserForm(props) {
 	return (
@@ -41,8 +40,8 @@ const LoginForm = withFormik({
 
 	handleSubmit(values) {
 		console.log(values);
-		axios
-			.post(help.withBaseURL("auth/login"), {
+		axiosWithAuth()
+			.post("auth/login", {
 				email: values.email,
 				password: values.password
 			})
