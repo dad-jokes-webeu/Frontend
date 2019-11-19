@@ -4,9 +4,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import { Route } from "react-router-dom";
-import List from "./components/JokesList";
 import RegisterForm from "./components/Register";
 import LoginForm from "./components/Login";
+import JokesList from "./components/JokesList";
 import { Container, Row, Col } from "reactstrap";
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
 					exact
 					path="/"
 					render={props => {
-						return <List api="jokes/public" />;
+						return <JokesList api="jokes/public" />;
 					}}
 				/>
 			</Row>
@@ -45,7 +45,13 @@ function App() {
 			{/* Child: Jokes*/}
 			<Route path="/joke" component={"AddJoke"} />
 			<Route path="/joke/:id" component={"EditJoke"} />
-			<Route path="/jokes" component={"Jokes"} /> {/* Load More here */}
+			<Route
+				path="/jokes"
+				render={props => {
+					return <JokesList api="jokes/public" />;
+				}}
+			/>{" "}
+			{/* Load More here */}
 		</Container>
 	);
 }

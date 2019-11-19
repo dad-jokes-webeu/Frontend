@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import * as help from "../helpers";
-import axios from "axios";
+import axiosWithAuth from "../helpers/axios";
+
 import JokeCard from "./JokeCard";
 
 export default function List(props) {
@@ -8,11 +8,11 @@ export default function List(props) {
 	console.log(response);
 
 	useEffect(() => {
-		axios.get(help.withBaseURL(props.api)).then(res => {
-			console.log(res.data);
-
-			setResponse(res.data);
-		});
+		axiosWithAuth()
+			.get(props.api)
+			.then(res => {
+				setResponse(res.data);
+			});
 	}, []);
 
 	return (
