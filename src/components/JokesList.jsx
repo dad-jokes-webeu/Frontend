@@ -16,12 +16,12 @@ export default function List(props) {
 	}, []);
 
 	return (
-		<div>
+		<>
 			{response
 				? response.map(joke => {
 						return <JokeCard joke={joke} key={joke.id} />;
 				  })
 				: "Loading"}
-		</div>
+		</>
 	);
 }

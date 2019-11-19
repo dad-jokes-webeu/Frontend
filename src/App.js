@@ -5,19 +5,27 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import { Route } from "react-router-dom";
 import List from "./components/JokesList";
+import { Container, Row, Col } from "reactstrap";
 
 function App() {
 	return (
-		<div className="App">
-			<Navbar />
-			<Route
-				exact
-				path="/"
-				render={props => {
-					return <List api="jokes/public" />;
-				}}
-			/>
-			{/* <Route path="/" component={"Login"} /> */}
+
+		<Container>
+			<Row>
+				<Col>
+					<Navbar />
+				</Col>
+			</Row>
+			<Row>
+				<Route
+					exact
+					path="/"
+					render={props => {
+						return <List api="jokes/public" />;
+					}}
+				/>
+			</Row>
+    {/* <Route path="/" component={"Login"} /> */}
 			{/* <Route path="/" component={"Jokes"} /> */}
 			<Route path="/login" component={"Login"} />
 			<Route path="/register" component={"Register"} />
@@ -27,7 +35,7 @@ function App() {
 			<Route path="/joke" component={"AddJoke"} />
 			<Route path="/joke/:id" component={"EditJoke"} />
 			<Route path="/jokes" component={"Jokes"} /> {/* Load More here */}
-		</div>
+		</Container>
 	);
 }
 
