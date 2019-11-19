@@ -13,7 +13,7 @@ function JokeForm(props) {
 			<Row>
 				<Col>
 					<Form>
-						joke{" "}
+						Joke{" "}
 						<Field
 							name="joke"
 							render={({ field, form: { touched, errors } }) => (
@@ -32,7 +32,7 @@ function JokeForm(props) {
 								</>
 							)}
 						/>
-						punch{" "}
+						Punchline{" "}
 						<Field
 							name="punchline"
 							render={({ field, form: { touched, errors } }) => (
@@ -51,6 +51,19 @@ function JokeForm(props) {
 								</>
 							)}
 						/>
+						Private Joke?{" "}
+						<Field
+							name="private"
+							render={({ field, form: { touched, errors } }) => (
+								<>
+									<Input {...field} type="checkbox" />
+									{touched[field.name] &&
+										errors[field.name] && (
+											<Alert>{errors[field.name]}</Alert>
+										)}
+								</>
+							)}
+						/>
 						<Input type="submit" />
 					</Form>
 				</Col>
@@ -63,13 +76,15 @@ const Joke = withFormik({
 	mapPropsToValues({}) {
 		return {
 			joke: "",
-			punchline: ""
+			punchline: "",
+			private: false
 		};
 	},
 
 	validationSchema: yup.object().shape({
 		joke: yup.string().required("You didn't enter a joke"),
-		punchline: yup.string().required("You need to enter a punchline")
+		punchline: yup.string().required("You need to enter a punchline"),
+		private: yup.boolean()
 	}),
 
 	handleSubmit(values, tools) {
@@ -78,7 +93,7 @@ const Joke = withFormik({
 			.post("jokes/me", {
 				setup: values.joke,
 				punchline: values.punchline,
-				private: false
+				private: values.private
 			})
 			.then(response => {
 				tools.resetForm();
