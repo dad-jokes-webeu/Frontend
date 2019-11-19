@@ -24,6 +24,7 @@ function App() {
 					}}
 				/>
 			</Row>
+			<br />
 			{/* <Route path="/" component={"Login"} /> */}
 			{/* <Route path="/" component={"Jokes"} /> */}
 			<Route
