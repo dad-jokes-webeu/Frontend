@@ -1,27 +1,108 @@
 import React, { useState } from "react";
-import { Button, Card, Col, Row, Input } from "reactstrap";
+import { Button, Card, Col, Row, Input, Alert } from "reactstrap";
 import JokesList from "./JokesList";
 import { func } from "prop-types";
 import { useHistory } from "react-router-dom";
+import { withFormik, Form, Field } from "formik";
+import * as yup from "yup";
+import axiosWithAuth from "../helpers/axios";
 
-export default function Joke(props) {
+function JokeForm(props) {
 	return (
 		<>
 			<Row>
 				<Col>
-					joke <Input />
-					punch <Input type="textarea" />
-					<Button
-						color="success"
-						className="float-right"
-						onClick={e => {
-							console.log("add");
-						}}
-					>
-						Save?
-					</Button>
+					<Form>
+						Joke{" "}
+						<Field
+							name="joke"
+							render={({ field, form: { touched, errors } }) => (
+								<>
+									<Input
+										{...field}
+										type="text"
+										placeholder="Joke goes here"
+									/>
+									{touched[field.name] &&
+										errors[field.name] && (
+											<Alert color="danger">
+												{errors[field.name]}
+											</Alert>
+										)}
+								</>
+							)}
+						/>
+						Punchline{" "}
+						<Field
+							name="punchline"
+							render={({ field, form: { touched, errors } }) => (
+								<>
+									<Input
+										{...field}
+										type="textarea"
+										placeholder="Punchline goes here"
+									/>
+									{touched[field.name] &&
+										errors[field.name] && (
+											<Alert color="danger">
+												{errors[field.name]}
+											</Alert>
+										)}
+								</>
+							)}
+						/>
+						Private Joke?{" "}
+						<Field
+							name="private"
+							render={({ field, form: { touched, errors } }) => (
+								<>
+									<Input {...field} type="checkbox" />
+									{touched[field.name] &&
+										errors[field.name] && (
+											<Alert>{errors[field.name]}</Alert>
+										)}
+								</>
+							)}
+						/>
+						<Input type="submit" />
+					</Form>
 				</Col>
 			</Row>
 		</>
 	);
 }
+
+const Joke = withFormik({
+	mapPropsToValues({}) {
+		return {
+			joke: "",
+			punchline: "",
+			private: false
+		};
+	},
+
+	validationSchema: yup.object().shape({
+		joke: yup.string().required("You didn't enter a joke"),
+		punchline: yup.string().required("You need to enter a punchline"),
+		private: yup.boolean()
+	}),
+
+	handleSubmit(values, tools) {
+		console.log(values);
+		axiosWithAuth()
+			.post("jokes/me", {
+				setup: values.joke,
+				punchline: values.punchline,
+				private: values.private
+			})
+			.then(response => {
+				tools.resetForm();
+				console.log(response);
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	}
+})(JokeForm);
+
+export default Joke;
