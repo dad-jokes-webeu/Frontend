@@ -7,7 +7,7 @@ export default function axiosWithAuth() {
 	// const [token, setToken] = UseLocalStorage("token", "sss");
 	// const [token, setToken] = useState(localStorage.getItem("token"));
 
-	const token = localStorage.getItem("token");
+	const token = localStorage.getItem("token") || "";
 	// console.log(UseLocalStorage("test", "aaa"));
 	// localStorage.setItem("token", "abc");
 

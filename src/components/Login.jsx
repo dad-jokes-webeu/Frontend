@@ -1,27 +1,22 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { withFormik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import axiosWithAuth from "../helpers/axios";
 
 function UserForm(props) {
 	return (
-		<div>
-			<Form>
-				<label>
-					Email:
-					<Field type="text" name="email" placeholder="Email" />
-				</label>
-				<label>
-					Password
-					<Field
-						type="password"
-						name="password"
-						placeholder="Password"
-					/>
-				</label>
-				<input type="submit" />
-			</Form>
-		</div>
+		<Form>
+			<label>
+				Email:
+				<Field type="text" name="email" placeholder="Email" />
+			</label>
+			<label>
+				Password
+				<Field type="password" name="password" placeholder="Password" />
+			</label>
+			<input type="submit" />
+		</Form>
 	);
 }
 
@@ -38,14 +33,16 @@ const LoginForm = withFormik({
 		password: yup.string().required("Please enter a password")
 	}),
 
-	handleSubmit(values) {
-		console.log(values);
+	handleSubmit(values, { props }) {
 		axiosWithAuth()
 			.post("auth/login", {
 				email: values.email,
 				password: values.password
 			})
 			.then(response => {
+				localStorage.setItem("token", response.data.token);
+				props.history.push("/dashboard");
+
 				console.log(response);
 			})
 			.catch(error => {

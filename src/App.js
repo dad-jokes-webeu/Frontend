@@ -8,6 +8,8 @@ import RegisterForm from "./components/Register";
 import LoginForm from "./components/Login";
 import JokesList from "./components/JokesList";
 import { Container, Row, Col } from "reactstrap";
+import Dashboard from "./components/Dashboard";
+import Joke from "./components/Joke";
 
 function App() {
 	return (
@@ -22,7 +24,7 @@ function App() {
 					exact
 					path="/"
 					render={props => {
-						return <JokesList api="jokes/public" />;
+						return <JokesList {...props} api="jokes/public" />;
 					}}
 				/>
 			</Row>
@@ -31,24 +33,34 @@ function App() {
 			<Route
 				path="/register"
 				render={props => {
-					return <RegisterForm />;
+					return <RegisterForm {...props} />;
 				}}
 			/>
 			<Route
 				path="/login"
 				render={props => {
-					return <LoginForm />;
+					return <LoginForm {...props} />;
 				}}
 			/>
 			<Route path="/profile" component={"Profile"} />
-			<Route path="/dashboard" component={"Dashboard"} />{" "}
+			<Route
+				path="/dashboard"
+				render={props => {
+					return <Dashboard {...props} />;
+				}}
+			/>{" "}
 			{/* Child: Jokes*/}
-			<Route path="/joke" component={"AddJoke"} />
+			<Route
+				path="/joke"
+				render={props => {
+					return <Joke {...props} />;
+				}}
+			/>
 			<Route path="/joke/:id" component={"EditJoke"} />
 			<Route
 				path="/jokes"
 				render={props => {
-					return <JokesList api="jokes/public" />;
+					return <JokesList {...props} api="jokes/public" />;
 				}}
 			/>{" "}
 			{/* Load More here */}
