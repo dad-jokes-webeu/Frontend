@@ -20,6 +20,8 @@ import {
 
 import "./NavBar.scss";
 
+import useStateWithLocalStorage from "../helpers/uselocalstorage";
+
 // const NavContainer = styled.div`
 // 	display: flex;
 // 	justify-content: space-between;
@@ -44,9 +46,16 @@ const CustomNav = styled(Nav)`
 export default function SiteNavbar() {
 	const [dropdownOpen, setOpen] = useState(false);
 	const toggle = () => setOpen(!dropdownOpen);
+
+	const [token, setToken] = useStateWithLocalStorage("token", null);
+
+	React.useEffect(() => {
+		console.log(token);
+	}, [token]);
+
 	return (
 		<>
-			{localStorage.getItem("token") ? (
+			{token ? (
 				<Navbar color="light" light expand="md">
 					{/* <NavbarBrand href="/">reactstrap</NavbarBrand> */}
 					<NavbarToggler onClick={toggle} />

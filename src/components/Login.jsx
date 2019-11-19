@@ -5,7 +5,14 @@ import * as yup from "yup";
 import axiosWithAuth from "../helpers/axios";
 import { Alert, Input, FormGroup, Label, FormFeedback } from "reactstrap";
 
+import useStateWithLocalStorage from "../helpers/uselocalstorage";
+
 function UserForm(props) {
+	const [token, setToken] = useStateWithLocalStorage("token", null);
+
+	React.useEffect(() => {
+		console.log(token);
+	}, [token]);
 	return (
 		<Form>
 			<FormGroup>
@@ -98,6 +105,7 @@ const LoginForm = withFormik({
 			})
 			.then(response => {
 				localStorage.setItem("token", response.data.token);
+				// setToken("response.data.token"); ???
 				props.history.push("/dashboard");
 
 				console.log(response);
