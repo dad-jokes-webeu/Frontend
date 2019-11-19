@@ -9,6 +9,7 @@ import { Container, Row, Col } from "reactstrap";
 
 function App() {
 	return (
+
 		<Container>
 			<Row>
 				<Col>
@@ -24,6 +25,16 @@ function App() {
 					}}
 				/>
 			</Row>
+    {/* <Route path="/" component={"Login"} /> */}
+			{/* <Route path="/" component={"Jokes"} /> */}
+			<Route path="/login" component={"Login"} />
+			<Route path="/register" component={"Register"} />
+			<Route path="/profile" component={"Profile"} />
+			<Route path="/dashboard" component={"Dashboard"} />{" "}
+			{/* Child: Jokes*/}
+			<Route path="/joke" component={"AddJoke"} />
+			<Route path="/joke/:id" component={"EditJoke"} />
+			<Route path="/jokes" component={"Jokes"} /> {/* Load More here */}
 		</Container>
 	);
 }
