@@ -13,7 +13,7 @@ import {
 const NavContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
-	padding: 10px 60px;
+	/* padding: 10px 60px; */
 	align-items: center;
 	color: #358dd7;
 

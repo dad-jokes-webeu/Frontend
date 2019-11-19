@@ -22,6 +22,10 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
 		<title>Dad Jokes</title>
+		<link
+			href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+			rel="stylesheet"
+		/>
 		<meta name="description" content="A collection of the best Dad Jokes" />
 		<meta
 			name="image"
@@ -50,6 +54,21 @@
 		<meta name="og:url" content="https://best-dad-jokes.netlify.com/" />
 		<meta name="og:site_name" content="Dad Jokes" />
 		<meta name="og:type" content="website" />
+
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script
+			async
+			src="https://www.googletagmanager.com/gtag/js?id=G-LTYFD1MFXH"
+		></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag("js", new Date());
+
+			gtag("config", "G-LTYFD1MFXH");
+		</script>
 	</head>
 	<body>
 		<noscript>You need to enable JavaScript to run this app.</noscript>
