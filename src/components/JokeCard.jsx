@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Button } from "reactstrap";
+import { Button, Card, Col } from "reactstrap";
 import styled from "styled-components";
 
-const Card = styled.div`
-	width: 60%;
+const CustomCard = styled(Card)`
+	/* width: 60%; */
 	margin: 10px auto;
 	/* min-height: 220px; */
 	height: auto;
@@ -20,8 +20,8 @@ export default function JokeCard(props) {
 	}
 
 	return (
-		<div>
-			<Card body>
+		<Col xs="12" md="6">
+			<CustomCard body>
 				<h1>Joke #{props.joke.id}</h1>
 				<h2>{props.joke.setup}</h2>
 				<h2 className={showPLine ? "" : "punchline-hide"}>
@@ -30,8 +30,8 @@ export default function JokeCard(props) {
 				<Button color="primary" onClick={() => togglePLine()}>
 					{showPLine ? "Hide" : "Punchline..."}
 				</Button>
-			</Card>
-		</div>
+			</CustomCard>
+		</Col>
 	);
 }
 

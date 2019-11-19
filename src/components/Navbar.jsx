@@ -13,7 +13,7 @@ import {
 const NavContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
-	padding: 10px 60px;
+	/* padding: 10px 60px; */
 	align-items: center;
 	color: #358dd7;
 
@@ -39,7 +39,7 @@ export default function Navbar() {
 		<NavContainer>
 			<img src={logo} alt="logo" />
 			<Nav>
-				<Link to='#'>
+				<Link to="#">
 					<Button outline color="primary">
 						Knock-knock
 					</Button>{" "}
@@ -49,10 +49,10 @@ export default function Navbar() {
 						Who's there?
 					</DropdownToggle>
 					<DropdownMenu>
-						<Link to='#'>
+						<Link to="#">
 							<DropdownItem>Sign In</DropdownItem>
 						</Link>
-						<Link to='#'>
+						<Link to="#">
 							<DropdownItem>Register</DropdownItem>
 						</Link>
 					</DropdownMenu>
