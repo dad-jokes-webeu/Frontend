@@ -30,7 +30,7 @@ function UserForm(props) {
 	);
 }
 
-const FormikForm = withFormik({
+const RegisterForm = withFormik({
 	mapPropsToValues({}) {
 		return {
 			username: "",
@@ -62,4 +62,4 @@ const FormikForm = withFormik({
 	}
 })(UserForm);
 
-export default FormikForm;
+export default RegisterForm;

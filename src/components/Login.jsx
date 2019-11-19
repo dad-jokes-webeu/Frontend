@@ -9,10 +9,6 @@ function UserForm(props) {
 		<div>
 			<Form>
 				<label>
-					Username:
-					<Field type="text" name="username" placeholder="Username" />
-				</label>
-				<label>
 					Email:
 					<Field type="text" name="email" placeholder="Email" />
 				</label>
@@ -30,7 +26,7 @@ function UserForm(props) {
 	);
 }
 
-const FormikForm = withFormik({
+const LoginForm = withFormik({
 	mapPropsToValues({}) {
 		return {
 			email: "",
@@ -59,4 +55,4 @@ const FormikForm = withFormik({
 	}
 })(UserForm);
 
-export default FormikForm;
+export default LoginForm;

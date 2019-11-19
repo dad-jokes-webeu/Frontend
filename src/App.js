@@ -5,7 +5,8 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import { Route } from "react-router-dom";
 import List from "./components/JokesList";
-import FormikForm from "./components/Register";
+import RegisterForm from "./components/Register";
+import LoginForm from "./components/Login";
 
 function App() {
 	return (
@@ -21,7 +22,13 @@ function App() {
 			<Route
 				path="/register"
 				render={props => {
-					return <FormikForm />;
+					return <RegisterForm />;
+				}}
+			/>
+			<Route
+				path="/login"
+				render={props => {
+					return <LoginForm />;
 				}}
 			/>
 		</div>
