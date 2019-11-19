@@ -10,6 +10,7 @@ const CustomCard = styled(Card)`
 	border-radius: 10px;
 	border: 1px solid black;
 	padding: 10px;
+	background-color: orange;
 `;
 
 export default function JokeCard(props) {
@@ -34,16 +35,3 @@ export default function JokeCard(props) {
 		</Col>
 	);
 }
-
-{
-	/* <Row>
-
-<Col sm="6">
-  <Card body>
-    <CardTitle>Special Title Treatment</CardTitle>
-    <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-    <Button>Go somewhere</Button>
-  </Card>
-</Col> */
-}
-// </Row>

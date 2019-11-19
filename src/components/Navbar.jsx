@@ -49,10 +49,10 @@ export default function Navbar() {
 						Who's there?
 					</DropdownToggle>
 					<DropdownMenu>
-						<Link to="#">
+						<Link to="/login">
 							<DropdownItem>Sign In</DropdownItem>
 						</Link>
-						<Link to="#">
+						<Link to="/register">
 							<DropdownItem>Register</DropdownItem>
 						</Link>
 					</DropdownMenu>

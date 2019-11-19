@@ -5,11 +5,12 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import { Route } from "react-router-dom";
 import List from "./components/JokesList";
+import RegisterForm from "./components/Register";
+import LoginForm from "./components/Login";
 import { Container, Row, Col } from "reactstrap";
 
 function App() {
 	return (
-
 		<Container>
 			<Row>
 				<Col>
@@ -25,10 +26,20 @@ function App() {
 					}}
 				/>
 			</Row>
-    {/* <Route path="/" component={"Login"} /> */}
+			{/* <Route path="/" component={"Login"} /> */}
 			{/* <Route path="/" component={"Jokes"} /> */}
-			<Route path="/login" component={"Login"} />
-			<Route path="/register" component={"Register"} />
+			<Route
+				path="/register"
+				render={props => {
+					return <RegisterForm />;
+				}}
+			/>
+			<Route
+				path="/login"
+				render={props => {
+					return <LoginForm />;
+				}}
+			/>
 			<Route path="/profile" component={"Profile"} />
 			<Route path="/dashboard" component={"Dashboard"} />{" "}
 			{/* Child: Jokes*/}
