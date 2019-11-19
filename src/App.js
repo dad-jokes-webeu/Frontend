@@ -5,7 +5,7 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import { Route } from "react-router-dom";
 import List from "./components/JokesList";
-import FormikForm from "./components/Form";
+import FormikForm from "./components/Register";
 
 function App() {
 	return (
