@@ -18,7 +18,12 @@ function App() {
 					return <List api="jokes/public" />;
 				}}
 			/>
-			<FormikForm />
+			<Route
+				path="/register"
+				render={props => {
+					return <FormikForm />;
+				}}
+			/>
 		</div>
 	);
 }
