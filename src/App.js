@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import logo from "./logo.svg";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import Navbar from "./components/Navbar";
+import SiteNavbar from "./components/Navbar";
 import { Route } from "react-router-dom";
 import RegisterForm from "./components/Register";
 import LoginForm from "./components/Login";
@@ -14,11 +14,7 @@ import Joke from "./components/Joke";
 function App() {
 	return (
 		<Container>
-			<Row>
-				<Col>
-					<Navbar />
-				</Col>
-			</Row>
+			<SiteNavbar />
 			<Row>
 				<Route
 					exact
