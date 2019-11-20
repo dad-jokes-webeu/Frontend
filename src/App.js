@@ -11,7 +11,7 @@ import { Container, Row, Col } from "reactstrap";
 import Dashboard from "./components/Dashboard";
 import Joke from "./components/Joke";
 import MainPage from "./components/MainPage";
-import Profile from "./components/Profile";
+import ProfileFormik from "./components/Profile";
 
 function App() {
 	return (
@@ -50,7 +50,7 @@ function App() {
 			<Route
 				path="/profile"
 				render={props => {
-					return <Profile />;
+					return <ProfileFormik />;
 				}}
 			/>
 			<Route
