@@ -2,7 +2,15 @@ import React, { useState, useEffect } from "react";
 import axiosWithAuth from "../helpers/axios";
 import { withFormik, Form, Field } from "formik";
 import * as yup from "yup";
-import { Col, Row, Input, Alert } from "reactstrap";
+import {
+	Col,
+	Row,
+	Input,
+	Alert,
+	FormGroup,
+	Label,
+	FormFeedback
+} from "reactstrap";
 
 function Profile(props) {
 	const [userInfo, setUserInfo] = useState({});
@@ -36,80 +44,143 @@ function Profile(props) {
 
 	return (
 		<>
-			<h1>Update Info?</h1>
+			<h1>Update profile:</h1>
+			<br />
 			<Row>
 				<Col>
 					<Form>
-						<Input
-							type="file"
-							// value={userInfo.image}
-							onChange={e => handleChange(e)}
-							accept="image/png, image/jpeg"
-							// placeholder="Joke goes here"
-						/>
-						Username{" "}
-						<Field
-							name="username"
-							render={({ field, form: { touched, errors } }) => (
-								<>
-									<Input
-										{...field}
-										type="text"
-										value={userInfo.username}
-										onChange={e => handleChange(e)}
-										// placeholder="Joke goes here"
-									/>
-									{touched[field.name] &&
-										errors[field.name] && (
-											<Alert color="danger">
+						<FormGroup>
+							<Label>Profile picture:</Label>
+							<Field
+								name="image"
+								render={({
+									field,
+									form: { touched, errors }
+								}) => (
+									<>
+										<Input
+											// {...field}
+											type="file"
+											invalid={
+												!!(
+													touched[field.name] &&
+													errors[field.name]
+												)
+											}
+											// value={userInfo.image}
+											onChange={e => handleChange(e)}
+											accept="image/png, image/jpeg"
+											// placeholder="Joke goes here"
+										/>
+										{touched[field.name] &&
+											errors[field.name] && (
+												<FormFeedback color="danger">
+													{errors[field.name]}
+												</FormFeedback>
+											)}
+									</>
+								)}
+							/>
+						</FormGroup>
+						<FormGroup>
+							<Label>Username:</Label>
+							<Field
+								name="username"
+								render={({
+									field,
+									form: { touched, errors }
+								}) => (
+									<>
+										<Input
+											{...field}
+											type="text"
+											invalid={
+												!!(
+													touched[field.name] &&
+													errors[field.name]
+												)
+											}
+											value={userInfo.username}
+											onChange={e => handleChange(e)}
+											// placeholder="Joke goes here"
+										/>
+										{touched[field.name] &&
+											errors[field.name] && (
+												<FormFeedback color="danger">
+													{errors[field.name]}
+												</FormFeedback>
+											)}
+									</>
+								)}
+							/>
+						</FormGroup>
+						<FormGroup>
+							<Label>Email:</Label>
+							<Field
+								name="email"
+								render={({
+									field,
+									form: { touched, errors }
+								}) => (
+									<>
+										<Input
+											{...field}
+											value={userInfo.email}
+											invalid={
+												!!(
+													touched[field.name] &&
+													errors[field.name]
+												)
+											}
+											onChange={e => {
+												handleChange(e);
+											}}
+											// placeholder=""
+										/>
+										{touched[field.name] &&
+											errors[field.name] && (
+												<FormFeedback color="danger">
+													{errors[field.name]}
+												</FormFeedback>
+											)}
+									</>
+								)}
+							/>
+						</FormGroup>
+						<FormGroup>
+							<Label>Password:</Label>
+							<Field
+								name="password"
+								render={({
+									field,
+									form: { touched, errors }
+								}) => (
+									<>
+										<Input
+											{...field}
+											invalid={!!errors[field.name]}
+											onChange={e => {
+												handleChange(e);
+											}}
+											type="password"
+											// placeholder=""
+										/>
+										{errors[field.name] && (
+											<FormFeedback color="danger">
 												{errors[field.name]}
-											</Alert>
+											</FormFeedback>
 										)}
-								</>
-							)}
-						/>
-						email{" "}
-						<Field
-							name="email"
-							render={({ field, form: { touched, errors } }) => (
-								<>
-									<Input
-										{...field}
-										value={userInfo.email}
-										onChange={e => {
-											handleChange(e);
-										}}
-										// placeholder=""
-									/>
-									{touched[field.name] &&
-										errors[field.name] && (
-											<Alert color="danger">
-												{errors[field.name]}
-											</Alert>
-										)}
-								</>
-							)}
-						/>
-						Password{" "}
-						<Field
-							name="password"
-							render={({ field, form: { touched, errors } }) => (
-								<>
-									<Input
-										{...field}
+									</>
+								)}
+							/>
+						</FormGroup>
 
-										// placeholder=""
-									/>
-									{touched[field.name] &&
-										errors[field.name] && (
-											<Alert color="danger">
-												{errors[field.name]}
-											</Alert>
-										)}
-								</>
-							)}
-						/>
 						<Input type="submit" />
+
+						<br />
+						{props.status && props.status.success && (
+							<Alert color="success">Profile updated</Alert>
+						)}
 					</Form>
 				</Col>
 			</Row>
@@ -134,7 +205,6 @@ const ProfileFormik = withFormik({
 	}),
 
 	handleSubmit(values, tools) {
-		console.log(axiosWithAuth(true));
 		axiosWithAuth()
 			.put("me", {
 				username: values.username,
@@ -145,6 +215,7 @@ const ProfileFormik = withFormik({
 				tools.resetForm();
 				console.log(response);
 				console.log(tools);
+				tools.setStatus({ success: true });
 				return response.data.id;
 			})
 			.then(id => {
