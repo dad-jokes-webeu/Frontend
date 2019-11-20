@@ -35,12 +35,14 @@ function App() {
 			{/* <Route path="/" component={"Login"} /> */}
 			{/* <Route path="/" component={"Jokes"} /> */}
 			<Route
+				exact
 				path="/register"
 				render={props => {
 					return <RegisterForm {...props} />;
 				}}
 			/>
 			<Route
+				exact
 				path="/login"
 				render={props => {
 					return <LoginForm {...props} />;
@@ -48,6 +50,7 @@ function App() {
 			/>
 			<Route path="/profile" component={"Profile"} />
 			<Route
+				exact
 				path="/dashboard"
 				render={props => {
 					return <Dashboard {...props} />;
@@ -55,13 +58,21 @@ function App() {
 			/>{" "}
 			{/* Child: Jokes*/}
 			<Route
+				exact
 				path="/joke"
+				render={props => {
+					return <Joke {...props} testggg="abc" />;
+				}}
+			/>
+			<Route
+				exact
+				path="/joke/:id"
 				render={props => {
 					return <Joke {...props} />;
 				}}
 			/>
-			<Route path="/joke/:id" component={"EditJoke"} />
 			<Route
+				exact
 				path="/jokes"
 				render={props => {
 					return <JokesList {...props} api="jokes/public" />;

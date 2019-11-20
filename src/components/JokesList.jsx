@@ -15,6 +15,9 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import IconButton from "@material-ui/core/IconButton";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
+
+import { useHistory } from "react-router-dom";
+
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -23,24 +26,30 @@ export default function List(props) {
 	const [response, setResponse] = useState([]);
 	console.log(response);
 
+	let history = useHistory();
+
 	useEffect(() => {
 		axiosWithAuth()
 			.get(props.api)
 			.then(res => {
-				setResponse(res.data);
+				setResponse(res.data.results);
 			});
 	}, []);
 
 	const [open, setOpen] = React.useState(false);
+	const [openDelete, setopenDelete] = React.useState(false);
+	const [joketoDelete, setjoketoDelete] = React.useState({});
 
 	const handleClickOpen = () => {
-		console.log("aa");
-
 		setOpen(true);
+	};
+	const handleClickDelete = jk => {
+		console.log(jk);
 	};
 
 	const handleClose = () => {
 		setOpen(false);
+		setopenDelete(false);
 	};
 
 	const likeJoke = jk => {
@@ -59,15 +68,25 @@ export default function List(props) {
 	};
 
 	const deleteJoke = jk => {
+		setopenDelete(true);
+		console.log(jk);
+		setjoketoDelete(jk);
+	};
+	const handleDelete = () => {
+		console.log(joketoDelete.id);
 		// TODO: axios request
-		// setResponse([
-		// 	...response.map(joke => {
-		// 		if (joke.id === jk.id) {
-		// 			joke.liked = true;
-		// 		}
-		// 		return joke;
-		// 	})
-		// ]);
+
+		axiosWithAuth()
+			.delete("me/jokes/" + joketoDelete.id)
+			.then(response => {
+				history.push("/dashboard");
+				console.log(response);
+
+				setopenDelete(false);
+			})
+			.catch(error => {
+				console.log(error);
+			});
 	};
 
 	return (
@@ -105,6 +124,30 @@ export default function List(props) {
 					</Button>
 				</DialogActions>
 			</Dialog>
+
+			<Dialog
+				open={openDelete}
+				TransitionComponent={Transition}
+				keepMounted
+				onClose={handleClose}
+				aria-labelledby="alert-dialog-slide-title"
+				aria-describedby="alert-dialog-slide-description"
+			>
+				<DialogTitle id="alert-dialog-slide-title">
+					Are you sure?
+				</DialogTitle>
+				<DialogContent>
+					<DialogContentText id="alert-dialog-slide-description"></DialogContentText>
+				</DialogContent>
+				<DialogActions>
+					<Button onClick={handleDelete} color="primary">
+						Yes
+					</Button>
+					<Button onClick={handleClose} color="primary">
+						No
+					</Button>
+				</DialogActions>
+			</Dialog>
 			{response
 				? response.map(joke => {
 						return (
@@ -112,6 +155,7 @@ export default function List(props) {
 								joke={joke}
 								key={joke.id}
 								share={handleClickOpen}
+								delete={handleClickDelete}
 								likeJoke={likeJoke}
 								deleteJoke={deleteJoke}
 							/>
