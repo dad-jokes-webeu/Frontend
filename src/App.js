@@ -15,7 +15,14 @@ import MainPage from "./components/MainPage";
 function App() {
 	return (
 		<Container>
-			<SiteNavbar />
+			{/* <SiteNavbar /> */}
+			<Route
+				path="/"
+				render={props => {
+					return <SiteNavbar {...props} />;
+					// return <JokesList {...props} api="jokes/public" />;
+				}}
+			/>
 			<Route
 				exact
 				path="/"
