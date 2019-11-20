@@ -39,7 +39,6 @@ function Profile(props) {
 
 	React.useEffect(() => {
 		props.setValues(userInfo);
-		console.log(userInfo);
 	}, [userInfo]);
 
 	return (
@@ -49,41 +48,61 @@ function Profile(props) {
 			<Row>
 				<Col>
 					<Form>
+						<Row>
+							<Col md="6">
+								<img
+									src={userInfo.avatar_url}
+									alt=""
+									className="profilepic"
+								/>
+							</Col>
+							<Col md="6" className="pfpinput">
+								<FormGroup>
+									<Label>
+										<b>Profile picture:</b>
+									</Label>
+									<Field
+										name="image"
+										render={({
+											field,
+											form: { touched, errors }
+										}) => (
+											<>
+												<Input
+													// {...field}
+													type="file"
+													invalid={
+														!!(
+															touched[
+																field.name
+															] &&
+															errors[field.name]
+														)
+													}
+													// value={userInfo.image}
+													onChange={e =>
+														handleChange(e)
+													}
+													accept="image/png, image/jpeg"
+													// placeholder="Joke goes here"
+												/>
+												{touched[field.name] &&
+													errors[field.name] && (
+														<FormFeedback color="danger">
+															{errors[field.name]}
+														</FormFeedback>
+													)}
+											</>
+										)}
+									/>
+								</FormGroup>
+							</Col>
+						</Row>
+						<br />
 						<FormGroup>
-							<Label>Profile picture:</Label>
-							<Field
-								name="image"
-								render={({
-									field,
-									form: { touched, errors }
-								}) => (
-									<>
-										<Input
-											// {...field}
-											type="file"
-											invalid={
-												!!(
-													touched[field.name] &&
-													errors[field.name]
-												)
-											}
-											// value={userInfo.image}
-											onChange={e => handleChange(e)}
-											accept="image/png, image/jpeg"
-											// placeholder="Joke goes here"
-										/>
-										{touched[field.name] &&
-											errors[field.name] && (
-												<FormFeedback color="danger">
-													{errors[field.name]}
-												</FormFeedback>
-											)}
-									</>
-								)}
-							/>
-						</FormGroup>
-						<FormGroup>
-							<Label>Username:</Label>
+							<Label>
+								<b>Username:</b>
+							</Label>
 							<Field
 								name="username"
 								render={({
@@ -115,7 +134,9 @@ function Profile(props) {
 							/>
 						</FormGroup>
 						<FormGroup>
-							<Label>Email:</Label>
+							<Label>
+								<b>Email:</b>
+							</Label>
 							<Field
 								name="email"
 								render={({
@@ -148,7 +169,9 @@ function Profile(props) {
 							/>
 						</FormGroup>
 						<FormGroup>
-							<Label>Password:</Label>
+							<Label>
+								<b>Password:</b>
+							</Label>
 							<Field
 								name="password"
 								render={({
@@ -221,17 +244,29 @@ const ProfileFormik = withFormik({
 			.then(id => {
 				console.log(values.image);
 				let form_data = new FormData();
-				console.log(values.image);
+				console.log(values);
 
 				form_data.append("image", values.image, "profile.jpg");
-				axiosWithAuth(true)
-					.post(`me/avatar/`, form_data)
-					.then(res => {
-						console.log(res);
-					})
-					.catch(err => {
-						console.log(err);
-					});
+
+				if (values.avatar_url === null) {
+					axiosWithAuth(true)
+						.post(`me/avatar/`, form_data)
+						.then(res => {
+							console.log(res);
+						})
+						.catch(err => {
+							console.log(err);
+						});
+				} else {
+					axiosWithAuth(true)
+						.put(`me/avatar/${values.id}`, form_data)
+						.then(res => {
+							console.log(res);
+						})
+						.catch(err => {
+							console.log(err);
+						});
+				}
 			})
 			.catch(error => {
 				console.log(error);

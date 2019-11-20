@@ -12,7 +12,9 @@ function UserForm(props) {
 	return (
 		<Form>
 			<FormGroup>
-				<Label>Email:</Label>
+				<Label>
+					<b>Email:</b>
+				</Label>
 				<Field
 					name="email"
 					render={({ field, form: { touched, errors } }) => (
@@ -38,7 +40,9 @@ function UserForm(props) {
 				/>
 			</FormGroup>
 			<FormGroup>
-				<Label>Password:</Label>
+				<Label>
+					<b>Password:</b>
+				</Label>
 				<Field
 					name="password"
 					render={({ field, form: { touched, errors } }) => (

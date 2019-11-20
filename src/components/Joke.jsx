@@ -78,6 +78,14 @@ function JokeForm(props) {
 		<>
 			<Row>
 				<Col>
+					<h1>
+						{JSON.stringify(joke) === "{}" ? "Add" : "Edit"} joke:{" "}
+					</h1>
+					<br />
+				</Col>
+			</Row>
+			<Row>
+				<Col>
 					<Form
 					// onSubmit={e => {
 					// 	e.preventDefault();
@@ -86,7 +94,9 @@ function JokeForm(props) {
 					// }}
 					>
 						<FormGroup>
-							<Label>Joke:</Label>
+							<Label>
+								<b>Joke:</b>
+							</Label>
 							<Field
 								name="setup"
 								render={({
@@ -118,7 +128,9 @@ function JokeForm(props) {
 							/>
 						</FormGroup>
 						<FormGroup>
-							<Label>Punchline:</Label>
+							<Label>
+								<b>Punchline:</b>
+							</Label>
 							<Field
 								name="punchline"
 								render={({
@@ -150,7 +162,10 @@ function JokeForm(props) {
 							/>
 						</FormGroup>
 						<FormGroup>
-							{/* <Label>?</Label> */}
+							<Label>
+								<b>Private?</b>
+							</Label>
+							<br />
 							<Field
 								name="private"
 								render={({
@@ -169,7 +184,6 @@ function JokeForm(props) {
 													color="primary"
 												/>
 											}
-											label="Private Joke?"
 										/>
 										{/* <Input {...field} type="checkbox" /> */}
 										{touched[field.name] &&
