@@ -9,7 +9,7 @@ export default function MainPage(props) {
 		<>
 			<h1>Welcome to the best collection of dad Jokes</h1>
 			<Row>
-				<JokesList {...props} api="jokes/public" />
+				<JokesList {...props} api="public/jokes" />
 			</Row>
 		</>
 	);
