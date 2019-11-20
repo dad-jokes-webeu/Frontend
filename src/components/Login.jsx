@@ -8,11 +8,7 @@ import { Alert, Input, FormGroup, Label, FormFeedback } from "reactstrap";
 import useStateWithLocalStorage from "../helpers/uselocalstorage";
 
 function UserForm(props) {
-	const [token, setToken] = useStateWithLocalStorage("token", null);
-
-	React.useEffect(() => {
-		console.log(token);
-	}, [token]);
+	// const [token, setToken] = useStateWithLocalStorage("token", null);
 	return (
 		<Form>
 			<FormGroup>
@@ -105,7 +101,9 @@ const LoginForm = withFormik({
 			})
 			.then(response => {
 				localStorage.setItem("token", response.data.token);
-				// setToken("response.data.token"); ???
+
+				// setToken("response.data.token");
+
 				props.history.push("/dashboard");
 
 				console.log(response);

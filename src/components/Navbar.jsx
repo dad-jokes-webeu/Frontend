@@ -50,8 +50,8 @@ export default function SiteNavbar() {
 	const [token, setToken] = useStateWithLocalStorage("token", null);
 
 	React.useEffect(() => {
-		console.log(token);
-	}, [token]);
+		setToken(localStorage.getItem("token") || "");
+	});
 
 	return (
 		<>
