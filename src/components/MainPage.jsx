@@ -5,12 +5,16 @@ import { func } from "prop-types";
 import { useHistory } from "react-router-dom";
 
 export default function MainPage(props) {
+	const [jokeofDay, setjokeofDay] = useState({});
+
+	const getJokeofday = () => {};
+
 	return (
-		<>
-			<h1>Welcome to the best collection of dad Jokes</h1>
+		<div className="mainpage">
+			<h1>Popular Jokes</h1>
 			<Row>
-				<JokesList {...props} api="public/jokes" />
+				<JokesList {...props} api="public/jokes/popular" />
 			</Row>
-		</>
+		</div>
 	);
 }
