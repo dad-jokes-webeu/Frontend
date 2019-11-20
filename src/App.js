@@ -11,6 +11,7 @@ import { Container, Row, Col } from "reactstrap";
 import Dashboard from "./components/Dashboard";
 import Joke from "./components/Joke";
 import MainPage from "./components/MainPage";
+import ProfileFormik from "./components/Profile";
 
 function App() {
 	return (
@@ -48,7 +49,12 @@ function App() {
 					return <LoginForm {...props} />;
 				}}
 			/>
-			<Route path="/profile" component={"Profile"} />
+			<Route
+				path="/profile"
+				render={props => {
+					return <ProfileFormik />;
+				}}
+			/>
 			<Route
 				exact
 				path="/dashboard"
