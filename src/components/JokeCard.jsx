@@ -34,7 +34,9 @@ import DeleteIcon from "@material-ui/icons/Delete";
 // `;
 
 const useStyles = makeStyles(theme => ({
-	card: {},
+	card: {
+		marginBottom: "30px"
+	},
 	media: {
 		height: 0,
 		paddingTop: "56.25%" // 16:9
@@ -81,7 +83,11 @@ export default function JokeCard(props) {
 				<CardHeader
 					avatar={
 						<Avatar aria-label="recipe" className={classes.avatar}>
-							{props.joke.user_id}
+							{props.joke.user_avatar ? (
+								<img src={props.joke.user_avatar} alt="" />
+							) : (
+								(props.joke.user_username || "").slice(0, 1)
+							)}
 						</Avatar>
 					}
 					action={
@@ -96,7 +102,7 @@ export default function JokeCard(props) {
 									>
 										<DeleteIcon />
 									</IconButton>
-									<Link to="joke/2">
+									<Link to={`joke/${props.joke.id}`}>
 										<IconButton aria-label="settings">
 											<EditIcon />
 										</IconButton>
@@ -107,8 +113,8 @@ export default function JokeCard(props) {
 							)}
 						</>
 					}
-					title={"USERNAME HERE" + props.joke.id}
-					subheader="September 14, 2016"
+					title={props.joke.user_username}
+					// subheader="September 14, 2016"
 				/>
 				{/* <CardMedia
 					className={classes.media}
