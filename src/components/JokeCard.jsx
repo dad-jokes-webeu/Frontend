@@ -151,6 +151,7 @@ export default function JokeCard(props) {
 					>
 						<FavoriteIcon />
 					</IconButton>
+					<div className="heartext">{props.joke.likes}</div>
 					<IconButton aria-label="share" onClick={e => props.share()}>
 						<ShareIcon />
 					</IconButton>
