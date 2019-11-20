@@ -33,6 +33,9 @@ import DeleteIcon from "@material-ui/icons/Delete";
 // 	background-color: orange;
 // `;
 
+// import useStateWithLocalStorage from "../helpers/uselocalstorage";
+// const [token, setToken] = useStateWithLocalStorage("token", null);
+
 const useStyles = makeStyles(theme => ({
 	card: {
 		marginBottom: "30px"
@@ -52,14 +55,16 @@ const useStyles = makeStyles(theme => ({
 		transform: "rotate(180deg)"
 	},
 	avatar: {
-		backgroundColor: red[500]
+		backgroundColor: "unset",
+		backgroundPosition: "center",
+		backgroundSize: "contain"
 	},
 	actions: {
 		display: "flex",
 		justifyContent: "space-between"
 	},
 	liked: {
-		color: "red"
+		color: "#EE4C49"
 	}
 }));
 
@@ -84,7 +89,11 @@ export default function JokeCard(props) {
 					avatar={
 						<Avatar aria-label="recipe" className={classes.avatar}>
 							{props.joke.user_avatar ? (
-								<img src={props.joke.user_avatar} alt="" />
+								<img
+									src={props.joke.user_avatar}
+									alt=""
+									width="100%"
+								/>
 							) : (
 								(props.joke.user_username || "").slice(0, 1)
 							)}
