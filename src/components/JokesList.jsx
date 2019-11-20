@@ -158,6 +158,7 @@ export default function List(props) {
 								delete={handleClickDelete}
 								likeJoke={likeJoke}
 								deleteJoke={deleteJoke}
+								api={props.api}
 							/>
 						);
 				  })

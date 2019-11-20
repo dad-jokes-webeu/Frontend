@@ -57,20 +57,6 @@ function JokeForm(props) {
 	React.useEffect(() => {
 		props.setValues(joke);
 	}, [joke]);
-	// React.useEffect(() => {
-	// 	console.log(props.values);
-	// 	console.log(joke);
-	// 	console.log("props.touched");
-	// 	console.log(props.touched);
-
-	// 	if (props.values === props.initialValues) {
-	// 	} else {
-	// 		setJoke({
-	// 			...joke
-	// 			// punchline: "abc"
-	// 		});
-	// 	}
-	// }, [props.values]);
 
 	console.log(props.values);
 
