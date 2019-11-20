@@ -21,11 +21,17 @@ function Profile(props) {
 	}, []);
 
 	function handleChange(e) {
-		setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+		if (e.target.type === "file") {
+			console.log("file");
+			setUserInfo({ ...userInfo, image: e.target.files[0] });
+		} else {
+			setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+		}
 	}
 
 	React.useEffect(() => {
 		props.setValues(userInfo);
+		console.log(userInfo);
 	}, [userInfo]);
 
 	return (
@@ -34,25 +40,12 @@ function Profile(props) {
 			<Row>
 				<Col>
 					<Form>
-						<Field
-							name="image"
-							render={({ field, form: { touched, errors } }) => (
-								<>
-									<Input
-										{...field}
-										type="file"
-										value={userInfo.image}
-										onChange={e => handleChange(e)}
-										// placeholder="Joke goes here"
-									/>
-									{touched[field.name] &&
-										errors[field.name] && (
-											<Alert color="danger">
-												{errors[field.name]}
-											</Alert>
-										)}
-								</>
-							)}
+						<Input
+							type="file"
+							// value={userInfo.image}
+							onChange={e => handleChange(e)}
+							accept="image/png, image/jpeg"
+							// placeholder="Joke goes here"
 						/>
 						Username{" "}
 						<Field
@@ -129,8 +122,8 @@ const ProfileFormik = withFormik({
 		return {
 			username: username || "",
 			email: email || "",
-			password: password || "",
-			image: image || ""
+			password: password || ""
+			// image: image || ""
 		};
 	},
 
@@ -157,6 +150,8 @@ const ProfileFormik = withFormik({
 			.then(id => {
 				console.log(values.image);
 				let form_data = new FormData();
+				console.log(values.image);
+
 				form_data.append("image", values.image, "profile.jpg");
 				axiosWithAuth(true)
 					.post(`me/avatar/`, form_data)
