@@ -27,7 +27,7 @@ export default function List(props) {
 		axiosWithAuth()
 			.get(props.api)
 			.then(res => {
-				setResponse(res.data);
+				setResponse(res.data.results);
 			});
 	}, []);
 

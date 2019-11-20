@@ -90,7 +90,7 @@ const Joke = withFormik({
 	handleSubmit(values, tools) {
 		console.log(values);
 		axiosWithAuth()
-			.post("jokes/me", {
+			.post("me/jokes", {
 				setup: values.joke,
 				punchline: values.punchline,
 				private: values.private
