@@ -27,9 +27,7 @@ export default function Dashboard(props) {
 				</Col>
 			</Row>
 			<Row>
-				<Col>
-					<JokesList api="jokes/me" />
-				</Col>
+				<JokesList api="jokes/me" dashboard={true} />
 			</Row>
 		</>
 	);

@@ -10,20 +10,20 @@ import JokesList from "./components/JokesList";
 import { Container, Row, Col } from "reactstrap";
 import Dashboard from "./components/Dashboard";
 import Joke from "./components/Joke";
+import MainPage from "./components/MainPage";
 
 function App() {
 	return (
 		<Container>
 			<SiteNavbar />
-			<Row>
-				<Route
-					exact
-					path="/"
-					render={props => {
-						return <JokesList {...props} api="jokes/public" />;
-					}}
-				/>
-			</Row>
+			<Route
+				exact
+				path="/"
+				render={props => {
+					return <MainPage {...props} />;
+					// return <JokesList {...props} api="jokes/public" />;
+				}}
+			/>
 			<br />
 			{/* <Route path="/" component={"Login"} /> */}
 			{/* <Route path="/" component={"Jokes"} /> */}
