@@ -17,6 +17,7 @@ import InstagramIcon from "@material-ui/icons/Instagram";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 
 import { useHistory } from "react-router-dom";
+import { Col } from "reactstrap";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="up" ref={ref} {...props} />;
@@ -24,17 +25,36 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function List(props) {
 	const [response, setResponse] = useState([]);
+	const [next, setNext] = useState(0);
 	console.log(response);
 
 	let history = useHistory();
 
 	useEffect(() => {
-		axiosWithAuth()
-			.get(props.api)
-			.then(res => {
-				setResponse(res.data.results);
-			});
+		loadJokes();
 	}, []);
+
+	// useEffect(() => {
+	// 	loadJokes();
+	// 	// console.log(page);
+	// }, [next]);
+
+	const loadMore = () => {
+		loadJokes();
+	};
+
+	const loadJokes = () => {
+		axiosWithAuth()
+			.get(props.api + (next !== 0 ? "?page=" + next : ""))
+			.then(res => {
+				if (res.data.next) {
+					setNext(res.data.next);
+				} else {
+					setNext(null);
+				}
+				setResponse([...response, ...res.data.results]);
+			});
+	};
 
 	const [open, setOpen] = React.useState(false);
 	const [openDelete, setopenDelete] = React.useState(false);
@@ -170,6 +190,7 @@ export default function List(props) {
 					</Button>
 				</DialogActions>
 			</Dialog>
+
 			{response
 				? response.map(joke => {
 						return (
@@ -185,6 +206,20 @@ export default function List(props) {
 						);
 				  })
 				: "Loading"}
+
+			<Col>
+				<div className="loaderdiv">
+					{next !== null && (
+						<Button
+							variant="outlined"
+							color="primary"
+							onClick={loadMore}
+						>
+							Load More
+						</Button>
+					)}
+				</div>
+			</Col>
 		</>
 	);
 }

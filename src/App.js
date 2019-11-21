@@ -32,7 +32,6 @@ function App() {
 					// return <JokesList {...props} api="jokes/public" />;
 				}}
 			/>
-			<br />
 			{/* <Route path="/" component={"Login"} /> */}
 			{/* <Route path="/" component={"Jokes"} /> */}
 			<Route

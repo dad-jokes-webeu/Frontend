@@ -43,7 +43,8 @@ const useStyles = makeStyles(theme => ({
 		transform: "rotate(180deg)"
 	},
 	avatar: {
-		backgroundColor: red[500]
+		backgroundColor: "#ccc",
+		color: "#000"
 	}
 }));
 
@@ -85,10 +86,9 @@ export default function MainPage(props) {
 										aria-label="recipe"
 										className={classes.avatar}
 									>
-										{(jokeofDay.user_username || "").slice(
-											0,
-											1
-										)}
+										{(jokeofDay.user_username || "")
+											.slice(0, 1)
+											.toUpperCase()}
 									</Avatar>
 								}
 								// action={}
