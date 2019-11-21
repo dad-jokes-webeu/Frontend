@@ -2,7 +2,15 @@ import React, { useState, useEffect } from "react";
 import axiosWithAuth from "../helpers/axios";
 import { withFormik, Form, Field } from "formik";
 import * as yup from "yup";
-import { Col, Row, Input, Alert } from "reactstrap";
+import {
+	Col,
+	Row,
+	Input,
+	Alert,
+	FormGroup,
+	Label,
+	FormFeedback
+} from "reactstrap";
 
 function Profile(props) {
 	const [userInfo, setUserInfo] = useState({});
@@ -31,85 +39,171 @@ function Profile(props) {
 
 	React.useEffect(() => {
 		props.setValues(userInfo);
-		console.log(userInfo);
 	}, [userInfo]);
 
 	return (
 		<>
-			<h1>Update Info?</h1>
+			<h1>Update profile:</h1>
+			<br />
 			<Row>
 				<Col>
 					<Form>
-						<Input
-							type="file"
-							// value={userInfo.image}
-							onChange={e => handleChange(e)}
-							accept="image/png, image/jpeg"
-							// placeholder="Joke goes here"
-						/>
-						Username{" "}
-						<Field
-							name="username"
-							render={({ field, form: { touched, errors } }) => (
-								<>
-									<Input
-										{...field}
-										type="text"
-										value={userInfo.username}
-										onChange={e => handleChange(e)}
-										// placeholder="Joke goes here"
-									/>
-									{touched[field.name] &&
-										errors[field.name] && (
-											<Alert color="danger">
-												{errors[field.name]}
-											</Alert>
+						<Row>
+							<Col md="6">
+								<img
+									src={userInfo.avatar_url}
+									alt=""
+									className="profilepic"
+								/>
+							</Col>
+							<Col md="6" className="pfpinput">
+								<FormGroup>
+									<Label>
+										<b>Profile picture:</b>
+									</Label>
+									<Field
+										name="image"
+										render={({
+											field,
+											form: { touched, errors }
+										}) => (
+											<>
+												<Input
+													// {...field}
+													type="file"
+													invalid={
+														!!(
+															touched[
+																field.name
+															] &&
+															errors[field.name]
+														)
+													}
+													// value={userInfo.image}
+													onChange={e =>
+														handleChange(e)
+													}
+													accept="image/png, image/jpeg"
+													// placeholder="Joke goes here"
+												/>
+												{touched[field.name] &&
+													errors[field.name] && (
+														<FormFeedback color="danger">
+															{errors[field.name]}
+														</FormFeedback>
+													)}
+											</>
 										)}
-								</>
-							)}
-						/>
-						email{" "}
-						<Field
-							name="email"
-							render={({ field, form: { touched, errors } }) => (
-								<>
-									<Input
-										{...field}
-										value={userInfo.email}
-										onChange={e => {
-											handleChange(e);
-										}}
-										// placeholder=""
 									/>
-									{touched[field.name] &&
-										errors[field.name] && (
-											<Alert color="danger">
+								</FormGroup>
+							</Col>
+						</Row>
+						<br />
+						<FormGroup>
+							<Label>
+								<b>Username:</b>
+							</Label>
+							<Field
+								name="username"
+								render={({
+									field,
+									form: { touched, errors }
+								}) => (
+									<>
+										<Input
+											{...field}
+											type="text"
+											invalid={
+												!!(
+													touched[field.name] &&
+													errors[field.name]
+												)
+											}
+											value={userInfo.username}
+											onChange={e => handleChange(e)}
+											// placeholder="Joke goes here"
+										/>
+										{touched[field.name] &&
+											errors[field.name] && (
+												<FormFeedback color="danger">
+													{errors[field.name]}
+												</FormFeedback>
+											)}
+									</>
+								)}
+							/>
+						</FormGroup>
+						<FormGroup>
+							<Label>
+								<b>Email:</b>
+							</Label>
+							<Field
+								name="email"
+								render={({
+									field,
+									form: { touched, errors }
+								}) => (
+									<>
+										<Input
+											{...field}
+											value={userInfo.email}
+											invalid={
+												!!(
+													touched[field.name] &&
+													errors[field.name]
+												)
+											}
+											onChange={e => {
+												handleChange(e);
+											}}
+											// placeholder=""
+										/>
+										{touched[field.name] &&
+											errors[field.name] && (
+												<FormFeedback color="danger">
+													{errors[field.name]}
+												</FormFeedback>
+											)}
+									</>
+								)}
+							/>
+						</FormGroup>
+						<FormGroup>
+							<Label>
+								<b>Password:</b>
+							</Label>
+							<Field
+								name="password"
+								render={({
+									field,
+									form: { touched, errors }
+								}) => (
+									<>
+										<Input
+											{...field}
+											invalid={!!errors[field.name]}
+											onChange={e => {
+												handleChange(e);
+											}}
+											type="password"
+											// placeholder=""
+										/>
+										{errors[field.name] && (
+											<FormFeedback color="danger">
 												{errors[field.name]}
-											</Alert>
+											</FormFeedback>
 										)}
-								</>
-							)}
-						/>
-						Password{" "}
-						<Field
-							name="password"
-							render={({ field, form: { touched, errors } }) => (
-								<>
-									<Input
-										{...field}
+									</>
+								)}
+							/>
+						</FormGroup>
 
-										// placeholder=""
-									/>
-									{touched[field.name] &&
-										errors[field.name] && (
-											<Alert color="danger">
-												{errors[field.name]}
-											</Alert>
-										)}
-								</>
-							)}
-						/>
 						<Input type="submit" />
+
+						<br />
+						{props.status && props.status.success && (
+							<Alert color="success">Profile updated</Alert>
+						)}
 					</Form>
 				</Col>
 			</Row>
@@ -134,7 +228,6 @@ const ProfileFormik = withFormik({
 	}),
 
 	handleSubmit(values, tools) {
-		console.log(axiosWithAuth(true));
 		axiosWithAuth()
 			.put("me", {
 				username: values.username,
@@ -145,22 +238,35 @@ const ProfileFormik = withFormik({
 				tools.resetForm();
 				console.log(response);
 				console.log(tools);
+				tools.setStatus({ success: true });
 				return response.data.id;
 			})
 			.then(id => {
 				console.log(values.image);
 				let form_data = new FormData();
-				console.log(values.image);
+				console.log(values);
 
 				form_data.append("image", values.image, "profile.jpg");
-				axiosWithAuth(true)
-					.post(`me/avatar/`, form_data)
-					.then(res => {
-						console.log(res);
-					})
-					.catch(err => {
-						console.log(err);
-					});
+
+				if (values.avatar_url === null) {
+					axiosWithAuth(true)
+						.post(`me/avatar/`, form_data)
+						.then(res => {
+							console.log(res);
+						})
+						.catch(err => {
+							console.log(err);
+						});
+				} else {
+					axiosWithAuth(true)
+						.put(`me/avatar/${values.id}`, form_data)
+						.then(res => {
+							console.log(res);
+						})
+						.catch(err => {
+							console.log(err);
+						});
+				}
 			})
 			.catch(error => {
 				console.log(error);

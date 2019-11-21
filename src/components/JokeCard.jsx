@@ -55,7 +55,8 @@ const useStyles = makeStyles(theme => ({
 		transform: "rotate(180deg)"
 	},
 	avatar: {
-		backgroundColor: "unset",
+		backgroundColor: "#ccc",
+		color: "#000",
 		backgroundPosition: "center",
 		backgroundSize: "contain"
 	},
@@ -101,7 +102,8 @@ export default function JokeCard(props) {
 					}
 					action={
 						<>
-							{localStorage.getItem("token") ? (
+							{localStorage.getItem("token") &&
+							props.api !== "public/jokes/popular" ? (
 								<>
 									<IconButton
 										aria-label="settings"
@@ -149,6 +151,7 @@ export default function JokeCard(props) {
 					>
 						<FavoriteIcon />
 					</IconButton>
+					<div className="heartext">{props.joke.likes}</div>
 					<IconButton aria-label="share" onClick={e => props.share()}>
 						<ShareIcon />
 					</IconButton>
