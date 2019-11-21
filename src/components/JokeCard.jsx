@@ -96,10 +96,13 @@ export default function JokeCard(props) {
 							>
 								{props.joke.user_avatar ? (
 									<img
-										src={props.joke.user_avatar.replace(
-											"http",
-											"https"
-										)}
+										src={
+											props.joke.user_avatar &&
+											props.joke.user_avatar.replace(
+												"http",
+												"https"
+											)
+										}
 										alt=""
 										width="100%"
 									/>

@@ -77,31 +77,33 @@ export default function MainPage(props) {
 
 			<Row>
 				<Col md={{ size: 6, order: 2, offset: 3 }}>
-					<Card className={classes.card} elevation={3}>
-						<CardHeader
-							avatar={
-								<Avatar
-									aria-label="recipe"
-									className={classes.avatar}
-								>
-									{(jokeofDay.user_username || "").slice(
-										0,
-										1
-									)}
-								</Avatar>
-							}
-							// action={}
-							title={"@" + jokeofDay.user_username}
-							subheader={new Date().toDateString()}
-						/>
-						<CardContent>
-							<Typography variant="body6" component="p">
-								<h2>{jokeofDay.setup}</h2>
-								<hr />
-								<h2>{jokeofDay.punchline}</h2>
-							</Typography>
-						</CardContent>
-					</Card>
+					{JSON.stringify(jokeofDay) !== "{}" && (
+						<Card className={classes.card} elevation={3}>
+							<CardHeader
+								avatar={
+									<Avatar
+										aria-label="recipe"
+										className={classes.avatar}
+									>
+										{(jokeofDay.user_username || "").slice(
+											0,
+											1
+										)}
+									</Avatar>
+								}
+								// action={}
+								title={"@" + jokeofDay.user_username}
+								subheader={new Date().toDateString()}
+							/>
+							<CardContent>
+								<Typography variant="body6" component="p">
+									<h2>{jokeofDay.setup}</h2>
+									<hr />
+									<h2>{jokeofDay.punchline}</h2>
+								</Typography>
+							</CardContent>
+						</Card>
+					)}
 				</Col>
 			</Row>
 			<br />
