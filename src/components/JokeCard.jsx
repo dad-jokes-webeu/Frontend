@@ -61,6 +61,10 @@ const useStyles = makeStyles(theme => ({
 		backgroundPosition: "center",
 		backgroundSize: "contain"
 	},
+	img: {
+		height: "40px",
+		width: "40px"
+	},
 	actions: {
 		display: "flex",
 		justifyContent: "space-between"
@@ -96,18 +100,18 @@ export default function JokeCard(props) {
 							>
 								{props.joke.user_avatar ? (
 									<img
-										src={
-											props.joke.user_avatar &&
-											props.joke.user_avatar.replace(
-												"http",
-												"https"
-											)
-										}
+										src={props.joke.user_avatar.replace(
+											"http",
+											"https"
+										)}
 										alt=""
 										width="100%"
+										className={classes.img}
 									/>
 								) : (
-									(props.joke.user_username || "").slice(0, 1)
+									(props.joke.user_username || "")
+										.slice(0, 1)
+										.toUpperCase()
 								)}
 							</Avatar>
 						}

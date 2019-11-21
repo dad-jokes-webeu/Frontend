@@ -68,12 +68,20 @@ export default function SiteNavbar() {
 						</Link>
 						<Nav className="ml-auto" navbar>
 							<NavItem>
-								<NavLink tag={RRNavLink} to="/profile">
+								<NavLink
+									tag={RRNavLink}
+									to="/profile"
+									onClick={e => toggle()}
+								>
 									Profile
 								</NavLink>
 							</NavItem>
 							<NavItem>
-								<NavLink tag={RRNavLink} to="/dashboard">
+								<NavLink
+									tag={RRNavLink}
+									to="/dashboard"
+									onClick={e => toggle()}
+								>
 									Dashboard
 								</NavLink>
 							</NavItem>
@@ -84,6 +92,7 @@ export default function SiteNavbar() {
 									exact
 									to="/"
 									onClick={e => {
+										toggle();
 										axiosWithAuth().post("auth/logout");
 										localStorage.removeItem("token");
 									}}
