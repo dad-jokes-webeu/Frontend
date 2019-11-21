@@ -13,10 +13,12 @@ import {
 	NavbarBrand,
 	Nav,
 	NavItem,
-	NavLink,
 	UncontrolledDropdown,
 	Collapse
 } from "reactstrap";
+
+import { NavLink } from "reactstrap";
+import { NavLink as RRNavLink } from "react-router-dom";
 
 import "./NavBar.scss";
 
@@ -66,18 +68,20 @@ export default function SiteNavbar() {
 						</Link>
 						<Nav className="ml-auto" navbar>
 							<NavItem>
-								<NavLink tag={Link} to="/profile">
+								<NavLink tag={RRNavLink} to="/profile">
 									Profile
 								</NavLink>
 							</NavItem>
 							<NavItem>
-								<NavLink tag={Link} to="/dashboard">
+								<NavLink tag={RRNavLink} to="/dashboard">
 									Dashboard
 								</NavLink>
 							</NavItem>
 							<NavItem>
 								<NavLink
+									className="logout"
 									tag={Link}
+									exact
 									to="/"
 									onClick={e => {
 										axiosWithAuth().post("auth/logout");

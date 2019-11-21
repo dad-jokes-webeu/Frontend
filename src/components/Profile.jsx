@@ -51,10 +51,13 @@ function Profile(props) {
 						<Row>
 							<Col md="6">
 								<img
-									src={userInfo.avatar_url.replace(
-										"http",
-										"https"
-									)}
+									src={
+										userInfo.avatar_url &&
+										userInfo.avatar_url.replace(
+											"http",
+											"https"
+										)
+									}
 									alt=""
 									className="profilepic"
 								/>
