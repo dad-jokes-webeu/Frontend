@@ -62,7 +62,7 @@ export default function List(props) {
 				if (joke.id === jk.id) {
 					joke.liked = !joke.liked;
 					if (joke.liked) {
-						console.log(joke.id);
+						joke.likes = Number(joke.likes) + 1;
 						axiosWithAuth()
 							.post(`me/jokes/${joke.id}/likes`)
 							.then(res => {
@@ -72,6 +72,7 @@ export default function List(props) {
 								console.log(err);
 							});
 					} else {
+						joke.likes = Number(joke.likes) - 1;
 						axiosWithAuth()
 							.delete(`me/jokes/${joke.id}/likes`)
 							.then(res => {
