@@ -7,6 +7,8 @@ import { Alert, Input, FormGroup, Label, FormFeedback } from "reactstrap";
 function UserForm(props) {
 	return (
 		<Form>
+			<h1>Register</h1>
+			<br />
 			<FormGroup>
 				<Label>
 					<b>Username:</b>

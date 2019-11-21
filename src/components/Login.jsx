@@ -11,6 +11,8 @@ function UserForm(props) {
 	// const [token, setToken] = useStateWithLocalStorage("token", null);
 	return (
 		<Form>
+			<h1>Login</h1>
+			<br />
 			<FormGroup>
 				<Label>
 					<b>Email:</b>
