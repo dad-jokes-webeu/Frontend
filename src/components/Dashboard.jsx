@@ -32,7 +32,7 @@ export default function Dashboard(props) {
 		<>
 			<Row>
 				<Col>
-					<h1>Dashboard: </h1>
+					<h1>Dashboard </h1>
 					<br />
 				</Col>
 			</Row>

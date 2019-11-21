@@ -25,6 +25,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 const useStyles = makeStyles(theme => ({
 	card: {
 		// maxWidth: 345
+		backgroundColor: "#F4CD18"
 	},
 	media: {
 		height: 0,
@@ -72,11 +73,11 @@ export default function MainPage(props) {
 
 	return (
 		<div className="mainpage">
-			<h1>Joke of the day:</h1>
-			<br />
+			<h1 className="hourJoke">Joke of the hour</h1>
+
 			<Row>
 				<Col md={{ size: 6, order: 2, offset: 3 }}>
-					<Card className={classes.card}>
+					<Card className={classes.card} elevation={3}>
 						<CardHeader
 							avatar={
 								<Avatar
@@ -90,22 +91,13 @@ export default function MainPage(props) {
 								</Avatar>
 							}
 							// action={}
-							title={jokeofDay.user_username}
+							title={"@" + jokeofDay.user_username}
 							subheader={new Date().toDateString()}
 						/>
-						<CardMedia
-							className={classes.media}
-							image="https://pbs.twimg.com/profile_images/923451113239703552/62jMMnTQ.jpg"
-							title="Paella dish"
-						/>
 						<CardContent>
-							<Typography
-								variant="body2"
-								color="textSecondary"
-								component="p"
-							>
+							<Typography variant="body6" component="p">
 								<h2>{jokeofDay.setup}</h2>
-								<br />
+								<hr />
 								<h2>{jokeofDay.punchline}</h2>
 							</Typography>
 						</CardContent>
@@ -113,7 +105,7 @@ export default function MainPage(props) {
 				</Col>
 			</Row>
 			<br />
-			<h1>Popular Jokes</h1>
+			<h1 className="popularJokes">Popular Jokes</h1>
 			<br />
 			<Row>
 				<JokesList {...props} api="public/jokes/popular" />
