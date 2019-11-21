@@ -60,7 +60,7 @@ export default function List(props) {
 		setResponse([
 			...response.map(joke => {
 				if (joke.id === jk.id) {
-					joke.liked = true;
+					joke.liked = !joke.liked;
 				}
 				return joke;
 			})
