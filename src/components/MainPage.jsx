@@ -45,8 +45,8 @@ const useStyles = makeStyles(theme => ({
 		transform: "rotate(180deg)"
 	},
 	avatar: {
-		backgroundColor: "#ccc",
-		color: "#000"
+		backgroundColor: "#3a2d67",
+		color: "#fff"
 	}
 }));
 
@@ -82,9 +82,10 @@ export default function MainPage(props) {
 				<Col md={{ size: 3, order: 1 }} className="dadimg">
 					<img src={dad} alt="" />
 				</Col>
+				<h1 className="hourjoekmobile">Joke of the hour</h1>
 				<Col md={{ size: 6, order: 2 }}>
 					{JSON.stringify(jokeofDay) !== "{}" && (
-						<Card className={classes.card} elevation={3}>
+						<Card className={classes.card} elevation={8}>
 							<CardHeader
 								avatar={
 									<Avatar

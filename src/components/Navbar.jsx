@@ -64,14 +64,18 @@ export default function SiteNavbar() {
 					{/* <NavbarBrand href="/">reactstrap</NavbarBrand> */}
 					<NavbarToggler onClick={toggle} />
 					<Collapse isOpen={dropdownOpen} navbar>
-						<Link to="/">
+						<NavLink
+							to="/"
+							onClick={e => toggle()}
+							className="mobilelogos"
+						>
 							<img src={logo} alt="logo" className="logo" />
 							<img
 								src={dad_jokes}
 								alt="logo"
 								className="dad_jokes"
 							/>
-						</Link>
+						</NavLink>
 						<Nav className="ml-auto" navbar>
 							<NavItem>
 								<NavLink
@@ -124,7 +128,9 @@ export default function SiteNavbar() {
 						</Link>
 						<Nav className="ml-auto" navbar>
 							<NavItem>
-								<NavLink to="#">Knock-knock</NavLink>
+								<NavLink className="knock" to="#">
+									Knock-knock
+								</NavLink>
 							</NavItem>
 							<UncontrolledDropdown nav inNavbar>
 								<DropdownToggle caret>

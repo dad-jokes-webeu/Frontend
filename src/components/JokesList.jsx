@@ -214,6 +214,7 @@ export default function List(props) {
 							variant="outlined"
 							color="primary"
 							onClick={loadMore}
+							className="morepurple"
 						>
 							Load More
 						</Button>
