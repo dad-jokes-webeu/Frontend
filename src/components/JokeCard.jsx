@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
@@ -85,94 +86,101 @@ export default function JokeCard(props) {
 
 	return (
 		<Col xs="12" md="6" lg="4">
-			<Card className={classes.card}>
-				<CardHeader
-					avatar={
-						<Avatar aria-label="recipe" className={classes.avatar}>
-							{props.joke.user_avatar ? (
-								<img
-									src={props.joke.user_avatar}
-									alt=""
-									width="100%"
-								/>
-							) : (
-								(props.joke.user_username || "").slice(0, 1)
-							)}
-						</Avatar>
-					}
-					action={
-						<>
-							{localStorage.getItem("token") &&
-							props.api !== "public/jokes/popular" ? (
-								<>
-									<IconButton
-										aria-label="settings"
-										onClick={e =>
-											props.deleteJoke(props.joke)
-										}
-									>
-										<DeleteIcon />
-									</IconButton>
-									<Link to={`joke/${props.joke.id}`}>
-										<IconButton aria-label="settings">
-											<EditIcon />
+			<Card className={classes.card} elevation={3}>
+				<CardActionArea onClick={handleExpandClick}>
+					<CardHeader
+						avatar={
+							<Avatar
+								aria-label="recipe"
+								className={classes.avatar}
+							>
+								{props.joke.user_avatar ? (
+									<img
+										src={props.joke.user_avatar.replace(
+											"http",
+											"https"
+										)}
+										alt=""
+										width="100%"
+									/>
+								) : (
+									(props.joke.user_username || "").slice(0, 1)
+								)}
+							</Avatar>
+						}
+						action={
+							<>
+								{localStorage.getItem("token") &&
+								props.api !== "public/jokes/popular" ? (
+									<>
+										<IconButton
+											aria-label="settings"
+											onClick={e =>
+												props.deleteJoke(props.joke)
+											}
+										>
+											<DeleteIcon />
 										</IconButton>
-									</Link>
-								</>
-							) : (
-								""
-							)}
-						</>
-					}
-					title={props.joke.user_username}
-					// subheader="September 14, 2016"
-				/>
-				{/* <CardMedia
+										<Link to={`joke/${props.joke.id}`}>
+											<IconButton aria-label="settings">
+												<EditIcon />
+											</IconButton>
+										</Link>
+									</>
+								) : (
+									""
+								)}
+							</>
+						}
+						title={props.joke.user_username}
+						// subheader="September 14, 2016"
+					/>
+					{/* <CardMedia
 					className={classes.media}
 					image="/static/images/cards/paella.jpg"
 					title="Paella dish"
 				/> */}
-				<CardContent>
-					<Typography
-						variant="body2"
-						color="textSecondary"
-						component="p"
-					>
-						{props.joke.setup}
-					</Typography>
-				</CardContent>
-				<CardActions disableSpacing className={classes.actions}>
-					<IconButton
-						aria-label="add to favorites"
-						className={props.joke.liked ? classes.liked : ""}
-						onClick={e => {
-							props.likeJoke(props.joke);
-						}}
-					>
-						<FavoriteIcon />
-					</IconButton>
-					<div className="heartext">{props.joke.likes}</div>
-					<IconButton aria-label="share" onClick={e => props.share()}>
-						<ShareIcon />
-					</IconButton>
-					<IconButton
-						className={clsx(classes.expand, {
-							[classes.expandOpen]: expanded
-						})}
-						onClick={handleExpandClick}
-						aria-expanded={expanded}
-						aria-label="show more"
-					>
-						<ExpandMoreIcon />
-					</IconButton>
-				</CardActions>
-				<Collapse in={expanded} timeout="auto" unmountOnExit>
 					<CardContent>
-						<Typography paragraph>
-							{props.joke.punchline}
+						<Typography variant="body6" elevation component="p">
+							{props.joke.setup}
 						</Typography>
 					</CardContent>
-				</Collapse>
+					<Collapse in={expanded} timeout="auto" unmountOnExit>
+						<CardContent>
+							<Typography paragraph>
+								{props.joke.punchline}
+							</Typography>
+						</CardContent>
+					</Collapse>
+					<CardActions disableSpacing className={classes.actions}>
+						<IconButton
+							aria-label="add to favorites"
+							className={props.joke.liked ? classes.liked : ""}
+							onClick={e => {
+								props.likeJoke(props.joke, e);
+							}}
+						>
+							<FavoriteIcon />
+						</IconButton>
+						<div className="heartext">{props.joke.likes}</div>
+						<IconButton
+							aria-label="share"
+							onClick={e => props.share()}
+						>
+							<ShareIcon />
+						</IconButton>
+						<IconButton
+							className={clsx(classes.expand, {
+								[classes.expandOpen]: expanded
+							})}
+							onClick={handleExpandClick}
+							aria-expanded={expanded}
+							aria-label="show more"
+						>
+							<ExpandMoreIcon />
+						</IconButton>
+					</CardActions>
+				</CardActionArea>
 			</Card>
 			{/* 
 			<CustomCard body>

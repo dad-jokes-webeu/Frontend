@@ -43,7 +43,7 @@ function Profile(props) {
 
 	return (
 		<>
-			<h1>Update profile:</h1>
+			<h1>Profile</h1>
 			<br />
 			<Row>
 				<Col>
@@ -51,7 +51,10 @@ function Profile(props) {
 						<Row>
 							<Col md="6">
 								<img
-									src={userInfo.avatar_url}
+									src={userInfo.avatar_url.replace(
+										"http",
+										"https"
+									)}
 									alt=""
 									className="profilepic"
 								/>

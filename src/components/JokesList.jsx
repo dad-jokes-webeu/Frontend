@@ -52,9 +52,10 @@ export default function List(props) {
 		setopenDelete(false);
 	};
 
-	const likeJoke = jk => {
+	const likeJoke = (jk, e) => {
 		console.log(jk);
 		console.log("like");
+		e.stopPropagation();
 
 		// TODO: axios request
 		setResponse([
