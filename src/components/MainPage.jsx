@@ -22,6 +22,8 @@ import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
+import dad from "../imgs/dad.jpg";
+
 const useStyles = makeStyles(theme => ({
 	card: {
 		// maxWidth: 345
@@ -77,7 +79,10 @@ export default function MainPage(props) {
 			<h1 className="hourJoke">Joke of the hour</h1>
 
 			<Row>
-				<Col md={{ size: 6, order: 2, offset: 3 }}>
+				<Col md={{ size: 3, order: 1 }} className="dadimg">
+					<img src={dad} alt="" />
+				</Col>
+				<Col md={{ size: 6, order: 2 }}>
 					{JSON.stringify(jokeofDay) !== "{}" && (
 						<Card className={classes.card} elevation={3}>
 							<CardHeader
@@ -104,6 +109,9 @@ export default function MainPage(props) {
 							</CardContent>
 						</Card>
 					)}
+				</Col>
+				<Col md={{ size: 3, order: 3 }} className="dadimg rightside">
+					<img src={dad} alt="" />
 				</Col>
 			</Row>
 			<br />

@@ -50,13 +50,20 @@ body {
 	font-family: "Source Sans Pro", sans-serif;
 }
 .MuiTypography-root h2 {
-	line-height: 3rem;
+	line-height: 2.7rem;
 	font-family: "Source Sans Pro", sans-serif;
+	font-size: 1.7rem;
 }
 .MuiPaper-root {
 	border: 1px solid #7361ad;
 }
-.MuiCollapse-container,
+.MuiCollapse-container {
+	text-transform: uppercase;
+	color: #3a2d67;
+}
+.MuiCardContent-root .MuiTypography-paragraph {
+	font-family: "Special Elite", cursive;
+}
 .MuiCardActions-root {
 	border-top: 1px solid #7361ad;
 }
@@ -71,7 +78,7 @@ h3 {
 .hourJoke,
 .popularJokes {
 	margin: 30px 0;
-	color: #216aa7;
+	color: #3a2d67;
 }
 .hourJoke {
 	margin: 50px 0;
@@ -84,4 +91,70 @@ h3 {
 	width: 100%;
 	text-align: center;
 	margin-bottom: 30px;
+}
+
+.dadimg {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	img {
+		width: 80%;
+	}
+	&.rightside {
+		transform: rotateY(180deg);
+	}
+}
+
+.siteTitle {
+	width: 111px;
+	height: 25px;
+	left: 73px;
+	top: 30px;
+	font-family: Special Elite;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 18px;
+	color: #f5bc4e;
+	border: 5px solid #3a2b69;
+	text-shadow: 5px 6px 4px rgba(0, 0, 0, 0.45);
+}
+.dad_jokes {
+	height: 40px;
+	margin-top: 5px;
+	margin-left: 10px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+	color: #3a2d67;
+}
+.navbar-light .navbar-nav .nav-link:hover {
+	opacity: 0.8;
+}
+
+.nav-item {
+	& > button {
+		background: #3a2d67;
+	}
+	& > button:hover {
+		background: #3a2d67;
+		opacity: 0.8;
+	}
+	& > button:active {
+		background: #3a2d67;
+		opacity: 0.8;
+	}
+
+	button:not(:disabled):not(.disabled):active {
+		background: #3a2d67;
+	}
+	& > button:active,
+	& > button:focus {
+		box-shadow: 0 0 0 0 rgba(130, 138, 145, 0.5) !important;
+	}
+}
+
+.glove {
+	width: 40px;
 }
