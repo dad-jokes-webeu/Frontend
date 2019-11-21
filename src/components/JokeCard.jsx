@@ -23,6 +23,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 
+import glove from "../imgs/boxinggloves.svg";
 // const CustomCard = styled(Card)`
 // 	/* width: 60%; */
 // 	margin: 10px auto;
@@ -184,7 +185,8 @@ export default function JokeCard(props) {
 							aria-expanded={expanded}
 							aria-label="show more"
 						>
-							<ExpandMoreIcon />
+							{/* <ExpandMoreIcon /> */}
+							<img src={glove} alt="" className="glove" />
 						</IconButton>
 					</CardActions>
 				</CardActionArea>

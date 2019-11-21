@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import logo from "../logo.svg";
+import dad_jokes from "../imgs/dad_jokes.png";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import {
@@ -59,12 +60,17 @@ export default function SiteNavbar() {
 	return (
 		<>
 			{token ? (
-				<Navbar color="light" light expand="md">
+				<Navbar light expand="md">
 					{/* <NavbarBrand href="/">reactstrap</NavbarBrand> */}
 					<NavbarToggler onClick={toggle} />
 					<Collapse isOpen={dropdownOpen} navbar>
 						<Link to="/">
 							<img src={logo} alt="logo" className="logo" />
+							<img
+								src={dad_jokes}
+								alt="logo"
+								className="dad_jokes"
+							/>
 						</Link>
 						<Nav className="ml-auto" navbar>
 							<NavItem>
@@ -104,19 +110,24 @@ export default function SiteNavbar() {
 					</Collapse>
 				</Navbar>
 			) : (
-				<Navbar color="light" light expand="md">
+				<Navbar light expand="md">
 					{/* <NavbarBrand href="/">reactstrap</NavbarBrand> */}
 					<NavbarToggler onClick={toggle} />
 					<Collapse isOpen={dropdownOpen} navbar>
 						<Link to="/">
 							<img src={logo} alt="logo" className="logo" />
+							<img
+								src={dad_jokes}
+								alt="logo"
+								className="dad_jokes"
+							/>
 						</Link>
 						<Nav className="ml-auto" navbar>
 							<NavItem>
 								<NavLink to="#">Knock-knock</NavLink>
 							</NavItem>
 							<UncontrolledDropdown nav inNavbar>
-								<DropdownToggle caret color="primary">
+								<DropdownToggle caret>
 									Who's there?
 								</DropdownToggle>
 								<DropdownMenu right>
