@@ -49,7 +49,11 @@ const CustomNav = styled(Nav)`
 
 export default function SiteNavbar() {
 	const [dropdownOpen, setOpen] = useState(false);
-	const toggle = () => setOpen(!dropdownOpen);
+	const toggle = () => {
+		if (window.innerWidth <= 800) {
+			setOpen(!dropdownOpen);
+		}
+	};
 
 	const [token, setToken] = useStateWithLocalStorage("token", null);
 
@@ -64,7 +68,7 @@ export default function SiteNavbar() {
 					{/* <NavbarBrand href="/">reactstrap</NavbarBrand> */}
 					<NavbarToggler onClick={toggle} />
 					<Collapse isOpen={dropdownOpen} navbar>
-						<NavLink
+						<Link
 							to="/"
 							onClick={e => toggle()}
 							className="mobilelogos"
@@ -75,7 +79,7 @@ export default function SiteNavbar() {
 								alt="logo"
 								className="dad_jokes"
 							/>
-						</NavLink>
+						</Link>
 						<Nav className="ml-auto" navbar>
 							<NavItem>
 								<NavLink
