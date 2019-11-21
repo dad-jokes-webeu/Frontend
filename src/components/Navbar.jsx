@@ -21,6 +21,7 @@ import {
 import "./NavBar.scss";
 
 import useStateWithLocalStorage from "../helpers/uselocalstorage";
+import axiosWithAuth from "../helpers/axios";
 
 // const NavContainer = styled.div`
 // 	display: flex;
@@ -72,6 +73,18 @@ export default function SiteNavbar() {
 							<NavItem>
 								<NavLink tag={Link} to="/dashboard">
 									Dashboard
+								</NavLink>
+							</NavItem>
+							<NavItem>
+								<NavLink
+									tag={Link}
+									to="/"
+									onClick={e => {
+										axiosWithAuth().post("auth/logout");
+										localStorage.removeItem("token");
+									}}
+								>
+									Logout
 								</NavLink>
 							</NavItem>
 						</Nav>
