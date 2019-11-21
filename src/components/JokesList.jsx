@@ -61,6 +61,26 @@ export default function List(props) {
 			...response.map(joke => {
 				if (joke.id === jk.id) {
 					joke.liked = !joke.liked;
+					if (joke.liked) {
+						console.log(joke.id);
+						axiosWithAuth()
+							.post(`me/jokes/${joke.id}/likes`)
+							.then(res => {
+								console.log(res);
+							})
+							.catch(err => {
+								console.log(err);
+							});
+					} else {
+						axiosWithAuth()
+							.delete(`me/jokes/${joke.id}/likes`)
+							.then(res => {
+								console.log(res);
+							})
+							.catch(err => {
+								console.log(err);
+							});
+					}
 				}
 				return joke;
 			})
