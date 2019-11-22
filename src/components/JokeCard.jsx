@@ -161,16 +161,24 @@ export default function JokeCard(props) {
 						</CardContent>
 					</Collapse>
 					<CardActions disableSpacing className={classes.actions}>
-						<IconButton
-							aria-label="add to favorites"
-							className={props.joke.liked ? classes.liked : ""}
-							onClick={e => {
-								props.likeJoke(props.joke, e);
-							}}
-						>
-							<FavoriteIcon />
-						</IconButton>
-						<div className="heartext">{props.joke.likes}</div>
+						{localStorage.getItem("token") && (
+							<>
+								<IconButton
+									aria-label="add to favorites"
+									className={
+										props.joke.liked ? classes.liked : ""
+									}
+									onClick={e => {
+										props.likeJoke(props.joke, e);
+									}}
+								>
+									<FavoriteIcon />
+								</IconButton>
+								<div className="heartext">
+									{props.joke.likes}
+								</div>
+							</>
+						)}
 						<IconButton
 							aria-label="share"
 							onClick={e => props.share()}
