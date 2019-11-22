@@ -12,6 +12,7 @@ import Dashboard from "./components/Dashboard";
 import Joke from "./components/Joke";
 import MainPage from "./components/MainPage";
 import ProfileFormik from "./components/Profile";
+import PublicJoke from "./components/PublicJoke";
 
 function App() {
 	return (
@@ -83,6 +84,13 @@ function App() {
 					return <JokesList {...props} api="jokes/public" />;
 				}}
 			/>{" "}
+			<Route
+				exact
+				path="/public-joke/:id"
+				render={props => {
+					return <PublicJoke {...props} />;
+				}}
+			/>
 			{/* Load More here */}
 		</Container>
 	);
