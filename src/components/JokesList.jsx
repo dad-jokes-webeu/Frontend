@@ -19,6 +19,8 @@ import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import { useHistory } from "react-router-dom";
 import { Col } from "reactstrap";
 
+import { FacebookShareButton } from "react-share";
+
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -26,6 +28,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function List(props) {
 	const [response, setResponse] = useState([]);
 	const [next, setNext] = useState(0);
+	const [shareId, setshareId] = useState(3);
 	console.log(response);
 
 	let history = useHistory();
@@ -60,8 +63,9 @@ export default function List(props) {
 	const [openDelete, setopenDelete] = React.useState(false);
 	const [joketoDelete, setjoketoDelete] = React.useState({});
 
-	const handleClickOpen = () => {
+	const handleClickOpen = id => {
 		setOpen(true);
+		setshareId(id);
 	};
 	const handleClickDelete = jk => {
 		console.log(jk);
@@ -147,7 +151,12 @@ export default function List(props) {
 				<DialogContent>
 					<DialogContentText id="alert-dialog-slide-description">
 						<IconButton>
-							<FacebookIcon style={{ fontSize: 50 }} />
+							<FacebookShareButton
+								children={
+									<FacebookIcon style={{ fontSize: 50 }} />
+								}
+								url={`https://best-dad-jokes.netlify.com/public-joke/${shareId}`}
+							/>
 						</IconButton>
 						<IconButton>
 							<TwitterIcon style={{ fontSize: 50 }} />

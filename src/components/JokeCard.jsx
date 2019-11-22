@@ -181,7 +181,7 @@ export default function JokeCard(props) {
 						)}
 						<IconButton
 							aria-label="share"
-							onClick={e => props.share()}
+							onClick={e => props.share(props.joke.id)}
 						>
 							<ShareIcon />
 						</IconButton>
