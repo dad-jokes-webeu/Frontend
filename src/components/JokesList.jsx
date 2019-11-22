@@ -12,6 +12,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import TwitterIcon from "@material-ui/icons/Twitter";
+import RedditIcon from "@material-ui/icons/Reddit";
 import IconButton from "@material-ui/core/IconButton";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
@@ -19,7 +20,11 @@ import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import { useHistory } from "react-router-dom";
 import { Col } from "reactstrap";
 
-import { FacebookShareButton } from "react-share";
+import {
+	FacebookShareButton,
+	TwitterShareButton,
+	RedditShareButton
+} from "react-share";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="up" ref={ref} {...props} />;
@@ -159,14 +164,27 @@ export default function List(props) {
 							/>
 						</IconButton>
 						<IconButton>
-							<TwitterIcon style={{ fontSize: 50 }} />
+							<TwitterShareButton
+								children={
+									<TwitterIcon style={{ fontSize: 50 }} />
+								}
+								url={`https://best-dad-jokes.netlify.com/public-joke/${shareId}`}
+							/>
 						</IconButton>
 						<IconButton>
+							<RedditShareButton
+								children={
+									<RedditIcon style={{ fontSize: 50 }} />
+								}
+								url={`https://best-dad-jokes.netlify.com/public-joke/${shareId}`}
+							/>
+						</IconButton>
+						{/* <IconButton>
 							<InstagramIcon style={{ fontSize: 50 }} />
 						</IconButton>
 						<IconButton>
 							<LinkedInIcon style={{ fontSize: 50 }} />
-						</IconButton>
+						</IconButton> */}
 					</DialogContentText>
 				</DialogContent>
 				<DialogActions>

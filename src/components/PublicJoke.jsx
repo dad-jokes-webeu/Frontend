@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Col, Row } from "reactstrap";
 import JokesList from "./JokesList";
 import { func } from "prop-types";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import axiosWithAuth from "../helpers/axios";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -55,7 +55,7 @@ export default function MainPage(props) {
 
 	const classes = useStyles();
 	const [expanded, setExpanded] = React.useState(false);
-
+	const { id } = useParams();
 	const handleExpandClick = () => {
 		setExpanded(!expanded);
 	};
@@ -64,9 +64,9 @@ export default function MainPage(props) {
 
 	React.useEffect(() => {
 		axiosWithAuth()
-			.get("public/jokes/thehour")
+			.get("public/jokes/" + id)
 			.then(response => {
-				setjokeofDay(response.data);
+				setjokeofDay(response.data[0]);
 				// props.values = response.data;
 			})
 			.catch(error => {
